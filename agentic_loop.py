@@ -269,22 +269,23 @@ def load_prompt(filename):
 def get_implementation_agent_advice(observe_message):
     # TODO: Load "implementation_task_prompt.txt" and replace the
     #       "{{VALIDATION_EVIDENCE}}" placeholder with observe_message.
+    implementation_task_prompt = load_prompt("implementation_task_prompt.txt").replace("{{VALIDATION_EVIDENCE}}", observe_message)
 
     # TODO: Call call_model() using IMPLEMENTATION_MODEL, the loaded
     #       "implementation_system_prompt.txt", the task prompt, and
     #       max_tokens=120. Return its result.
-    pass
-
+    return call_model(IMPLEMENTATION_MODEL, load_prompt("implementation_system_prompt.txt"), implementation_task_prompt, max_tokens=120)
 
 def get_review_agent_advice(implementation_message, observe_message):
     # TODO: Load "review_task_prompt.txt" and replace both the
     #       "{{IMPLEMENTATION_RECOMMENDATION}}" and "{{VALIDATION_EVIDENCE}}"
     #       placeholders.
+    review_task_prompt = load_prompt("review_task_prompt.txt").replace("{{IMPLEMENTATION_RECOMMENDATION}}", implementation_message).replace("{{VALIDATION_EVIDENCE}}", observe_message)
 
     # TODO: Call call_model() using REVIEW_MODEL, the loaded
     #       "review_system_prompt.txt", the task prompt, and
     #       max_tokens=150. Return its result.
-    pass
+    return call_model(REVIEW_MODEL, load_prompt("review_system_prompt.txt"), review_task_prompt, max_tokens=150)
 
 
 # =============================== Human Review & Adapt ================================

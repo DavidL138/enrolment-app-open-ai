@@ -30,3 +30,4 @@ Output rules:
 - Return exactly three lines.
 - Maximum 35 words total.
 - Do not explain reasoning.
+- Only raise risks tied to the subject-code search feature described in the Implementation Recommendation; ignore evidence about unrelated endpoints.
