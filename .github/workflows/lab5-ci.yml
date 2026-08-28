@@ -31,7 +31,6 @@ jobs:
 
       - name: Start services
         run: docker-compose up -d
-        working-directory: enrolment-app-open-ai
 
       - name: Smoke checks
         run: |
@@ -61,7 +60,6 @@ jobs:
       - name: Stop services
         if: always()
         run: docker-compose down -v
-        working-directory: enrolment-app-open-ai
 
   evidence-pack:
     runs-on: ubuntu-latest
@@ -72,7 +70,6 @@ jobs:
 
       - name: Create reports directory
         run: mkdir -p reports
-        working-directory: enrolment-app-open-ai
 
       - name: Generate report.json
         run: |
@@ -85,7 +82,6 @@ jobs:
             "generated_timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           }
           EOF
-        working-directory: enrolment-app-open-ai
 
       - name: Generate report.md
         run: |
@@ -97,7 +93,6 @@ jobs:
           - Commit SHA: ${{ github.sha }}
           - Branch: ${{ github.ref_name }}
           EOF
-        working-directory: enrolment-app-open-ai
 
       - name: Generate run-view.md
         run: |
@@ -105,7 +100,6 @@ jobs:
           Run URL:
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           EOF
-        working-directory: enrolment-app-open-ai
 
       - uses: actions/upload-artifact@v4
         with:
