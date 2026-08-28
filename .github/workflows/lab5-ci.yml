@@ -41,10 +41,12 @@ jobs:
 
             for i in $(seq 1 "$attempts"); do
               code=$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 5 --max-time 20 "$url" || true)
+
               if [ "$code" = "200" ]; then
                 echo "PASS $url -> $code"
                 return 0
               fi
+
               echo "Retry $i/$attempts for $url (got: ${code:-none})"
               sleep 2
             done
@@ -66,7 +68,8 @@ jobs:
     needs: [smoke-check]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Create reports directory
         run: |
@@ -104,18 +107,25 @@ jobs:
 
       - name: Verify files exist
         run: |
-          echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
-          echo "Current directory = $(pwd)"
-          echo ""
-          echo "Reports directory:"
+          echo "================================"
+          echo "GITHUB_WORKSPACE:"
+          echo "$GITHUB_WORKSPACE"
+          echo "================================"
+
+          echo "REPORTS DIRECTORY:"
           ls -lah "$GITHUB_WORKSPACE/reports"
-          echo ""
-          echo "Files:"
+
+          echo "================================"
+          echo "FILES:"
           find "$GITHUB_WORKSPACE/reports" -type f -print
+
+          echo "================================"
+          echo "REPORT.JSON:"
+          cat "$GITHUB_WORKSPACE/reports/report.json"
 
       - name: Upload evidence
         uses: actions/upload-artifact@v4
         with:
           name: lab5-report
-          path: ${{ github.workspace }}/reports
+          path: ${{ github.workspace }}/reports/
           if-no-files-found: error
