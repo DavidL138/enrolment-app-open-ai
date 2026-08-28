@@ -17,7 +17,7 @@ def _validate_student(student: tuple[int, str, str]) -> tuple[bool, str]:
 
 
 def collect(app_dir: Path, repo_root: Path) -> tuple[bool, str]:
-    db_path = app_dir / "legacy-lab3" / DATABASE_NAME
+    db_path = app_dir / DATABASE_NAME
     if not db_path.exists():
         return False, f"Missing local database file: {db_path.name}"
 
