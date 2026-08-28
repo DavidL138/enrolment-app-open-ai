@@ -17,7 +17,6 @@ jobs:
 
       - name: Build services
         run: docker-compose build
-        working-directory: enrolment-app-open-ai
 
   smoke-check:
     runs-on: ubuntu-latest
