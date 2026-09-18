@@ -9,7 +9,7 @@ def _truncate_words(text: str, limit: int = 45) -> str:
         return " ".join(words)
     return " ".join(words[:limit]) + " ..."
 
-
+# gets the AI model and gives it prompts
 class AIRunner:
     def __init__(self):
         self.base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")

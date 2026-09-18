@@ -20,6 +20,7 @@ AVAILABLE_TOOLS = [
     "ci_report",
 ]
 
+# routes to all the rools
 
 @mcp.tool()
 def student_count():
