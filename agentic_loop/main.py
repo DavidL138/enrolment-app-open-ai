@@ -24,6 +24,7 @@ def _menu_choice_to_key(choice: str) -> str | None:
         "4": "devops",
         "5": "mcp",
         "6": "rag",
+        "7": "multi_agent",
     }.get(choice)
 
 def _print_mode_mapping(app_dir: Path) -> None:
@@ -34,6 +35,7 @@ def _print_mode_mapping(app_dir: Path) -> None:
         "DevOps": app_dir / "prompts" / "lab5",
         "MCP": app_dir / "prompts" / "lab7",
         "RAG": app_dir / "prompts" / "lab8",
+        "Multi-Agent": app_dir / "prompts" / "lab10",
     }
     print_prompt_map({key: str(path) for key, path in prompt_map.items()})
 
@@ -58,7 +60,7 @@ def main() -> None:
 
     mode_key = _menu_choice_to_key(choice)
     if not mode_key:
-      print("Invalid choice. Select 0, 1, 2, 3, 4, or 5.")
+      print("Invalid choice. Select 0, 1, 2, 3, 4, 5, 6 or 7.")
       continue
 
     result = run_mode(mode_config[mode_key], app_dir, repo_root, prompts, ai)

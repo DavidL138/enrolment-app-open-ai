@@ -3,7 +3,6 @@ def print_prompt_map(mapping: dict[str, str]):
   for label, path in mapping.items():
     print(f"- {label}: {path}")
 
-
 def print_menu() -> None:
     print()
     print("=" * 70)
@@ -14,6 +13,7 @@ def print_menu() -> None:
     print("4 - DevOps")
     print("5 - MCP")
     print("6 - RAG")
+    print("7 - Multi-Agent")
     print("0 - Exit")
     print("=" * 70)
 
